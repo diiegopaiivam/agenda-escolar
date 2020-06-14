@@ -23,7 +23,7 @@ Projeto de Estudo com **NoneJS** e **ReactJS** em desenvolvimento
 
 ## **Objetivo**
 
-O projeto tem como finalidade **estabelecer uma conexão** entre **a escola e os responsaveis** através de  **de comunicados via email** e sobretudo **gerenciar o quantitativo de alunos**. Observando que muitas escolas estão cada vez mais adeptas a digitalização dos seus emails, este sistema visa também **substituir a agenda física trazendo mais facilidade para o responsável acomapnhar as atividades propostas em sala de aula**, melhorando assim a comunicação da escola com os responsáveis.
+O projeto tem como finalidade **estabelecer uma conexão** entre **a escola e os responsaveis** através **de comunicados via email**. Observando que muitas escolas estão cada vez mais adeptas a digitalização das suas atividades, este sistema visa também **substituir a agenda física trazendo mais facilidade para o responsável acomapnhar as atividades propostas em sala de aula**, melhorando assim a comunicação da **escola** com os **responsáveis**.
 
 <!-- 
   ...
