@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table, Button } from 'reactstrap';
 import api from './../../../services/api';
 import './style.css';
 
@@ -39,6 +39,7 @@ export default class TableAlunos extends Component {
                                 <th>E-mail</th>
                                 <th>Telefone</th>
                                 <th>Série</th>
+                                <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,7 @@ export default class TableAlunos extends Component {
                                         <td>{aluno.email}</td>
                                         <td>{aluno.phone}</td>
                                         <td>{aluno.serie}</td>
+                                        <td><Button color="danger" style={{width:'35px', height: '35px'}}><i className="fa fa-trash"></i></Button> - <Button color="info" style={{width:'35px', height: '35px'}}><i className="fa fa-pencil"></i></Button></td>
                                     </tr>
                                 ))}
                             </tbody>
