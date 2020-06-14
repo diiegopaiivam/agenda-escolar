@@ -6,11 +6,13 @@ class Aluno {
 
     async index(){
         const alunos = await connection(_table)
-            .select('*');
+            .join('series', 'alunos.serie_id', '=', 'series.id')
+            .join('responsaveis', 'alunos.responsavel_id', '=', 'responsaveis.id')
+            .distinct()
+            .select('alunos.*', 'responsaveis.name as responsavel', 'series.serie');
 
         return alunos;
     }
-
     
     async show(id, response){
         const aluno = await connection(_table).where('id', id).select('*');

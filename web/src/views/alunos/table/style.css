@@ -1,0 +1,28 @@
+.button-references {
+    width: 100%;
+    max-width: 180px;
+    height: 40px;
+    background: #4488ff;
+    border-radius: 8px;
+    padding: 11px;
+  
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-left: 750px;
+
+    transition: 0.2s;
+}
+
+.button-references:hover {
+    background: #2760c2;
+}
+
+
+.button-references span {
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}

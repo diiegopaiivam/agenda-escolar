@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Button,
     Card,
@@ -92,7 +93,7 @@ export default class Aluno extends Component {
                         <CardHeader>
                             <strong>Novo</strong> Aluno
                         </CardHeader>
-                        <Form action={this.handleSubmit} method="post" onSubmit={this.handleSubmit} className="form-horizontal">
+                        <Form action='' method="post" onSubmit={this.handleSubmit} className="form-horizontal">
                         <CardBody>
                             <FormGroup row>
                                 <Col md="3">
@@ -145,7 +146,7 @@ export default class Aluno extends Component {
                         </CardBody>
                         <CardFooter>
                             <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Salvar</Button>
-                            <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Cancelar</Button>
+                            <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i><Link to="/alunos" style={{textDecoration:'none'}}>Cancelar</Link></Button>
                         </CardFooter>
                         </Form>
                         </Card>

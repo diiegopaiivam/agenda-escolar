@@ -37,6 +37,7 @@ const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 
 const Aluno = React.lazy(() => import('./views/alunos/new/index'));
+const TableAlunos = React.lazy(() => import('./views/alunos/table/index'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -84,6 +85,7 @@ const routes = [
 
   //importações do sistema de agenda
   { path: '/alunos/new', exact:true, name: 'Novo Aluno', component: Aluno},
+  { path: '/alunos', exact:true, name: 'Alunos', component: TableAlunos },
 ];
 
 export default routes;

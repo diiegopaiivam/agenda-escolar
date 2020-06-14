@@ -42,8 +42,8 @@ export default {
       icon: 'fa fa-address-book-o fa-lg mt-4',
       children: [
         {
-          name: 'Cadastrar Alunos',
-          url: '/alunos/new',
+          name: 'Alunos',
+          url: '/alunos',
           icon: 'cui-user-follow icons'
         },
         {
