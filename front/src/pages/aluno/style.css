@@ -48,7 +48,7 @@
 }
 
 .container section {
-    margin-top: 80px;
+    margin-top: 50px;
     display: block;
     position: relative;
 }
@@ -64,6 +64,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.row img {
+    max-width: 50px;
+    position: absolute;
+    right: 80px;
 }
 
 .row .form-group {
@@ -101,4 +107,14 @@
     border: 1px solid #dcdce6;
     border-radius: 8px;
     padding: 0 8px;
+}
+
+.container-table {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1400px;
+    overflow-x: auto;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 10px;
 }
