@@ -31,6 +31,23 @@ module.exports = {
 
     async show(request, response){
         const { serie_id, responsavel, name } = request.query;
+        
+        //Se vier apenas a série da requisição, exibirá todos os alunos na mesma série
+        if(responsavel.length == [] && name.length == [] ){
+            var responsable = 0;
+            var nome = "";
+            const aluno = await Serie.show(serie_id, responsable , nome);
+
+            return response.status(200).json(aluno);
+        }
+
+        //Se vier serie_id e nome do aluno 
+        if(responsavel.length == []){
+            var responsable = 0;
+            const aluno = await Serie.show(serie_id, responsable , name);
+
+            return response.status(200).json(aluno);
+        }
 
         const resp = await Responsavel.show(responsavel); //pegando dados de um responsável passando o nome como parâmetro
         

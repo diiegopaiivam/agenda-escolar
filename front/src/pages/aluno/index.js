@@ -38,7 +38,7 @@ const Aluno = () => {
                         </div>
                     </form>
                     <div className="container-table">
-                        <Table aria-label="sticky table">
+                        <Table width="90%" aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
