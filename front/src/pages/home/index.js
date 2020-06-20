@@ -3,10 +3,12 @@ import { FiLogOut } from 'react-icons/fi';
 import Aluno from './../../assets/aluno.svg';
 import Responsavel from './../../assets/responsavel.svg';
 import Agenda from './../../assets/agenda-icon.svg';
+import { Link } from 'react-router-dom';
 
 import './style.css';
 
-const Home = () => {
+const Home = () => {    
+
     return (
         <div className="home">
             <div className="container">
@@ -21,15 +23,24 @@ const Home = () => {
                 <section>
                     <div className="title">Escolhe uma seção</div>
                     <div className="card-section">
-                        <div className="card-active">
-                            <img src={Aluno} alt="Seção de alunos" />
-                        </div>
-                        <div className="card">
-                            <img src={Responsavel} alt="Seção de Responsável" />
-                        </div>
-                        <div className="card">
-                            <img className="comunicado" src={Agenda} alt="Enviar comunicados" />
-                        </div>  
+                        <Link style={{textDecoration: 'none'}} to="/aluno">
+                            <div className="card">
+                                <img src={Aluno} alt="Seção de alunos" />
+                                <p className="description">Alunos</p>
+                            </div>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to="/responsavel">
+                            <div className="card">
+                                <img src={Responsavel} alt="Seção de Responsável" />
+                                <p className="description">Responsavel</p>
+                            </div>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to="/comunicado">
+                            <div className="card">
+                                <img className="comunicado" src={Agenda} alt="Enviar comunicados" />
+                                <p className="description-comunicado">Enviar Comunicado</p>
+                            </div>  
+                        </Link>
                     </div>
                 </section>
             </div>
