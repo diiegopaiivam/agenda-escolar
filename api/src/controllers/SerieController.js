@@ -34,6 +34,7 @@ module.exports = {
         
         //Se vier apenas a série da requisição, exibirá todos os alunos na mesma série
         if(responsavel.length == [] && name.length == []){
+            
             var responsable = 0;
             var nome = 1;
 

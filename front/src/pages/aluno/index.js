@@ -1,139 +1,112 @@
-import React, { useEffect, useState } from 'react';
-import { FiLogOut, FiPlus, FiSearch, FiTrash, FiEdit } from 'react-icons/fi';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import React, { Component } from 'react';
+import { FiLogOut, FiPlus, FiSearch } from 'react-icons/fi';
+import { Table, TableHead, TableRow, TableCell } from '@material-ui/core';
+
+import TableAluno from './table';
 import AlunoImg from './../../assets/aluno.svg';
 
 import api from './../../services/api';
 
 import './style.css';
 
-const Aluno = () => {
-
-    const [series, setSeries ] = useState([]);
-    const [name, setName] = useState('');
-    const [responsavel, setResponsavel] = useState('');
-    const [alunos, setAlunos] = useState([]);
-    const [serie_id, setSerieID] = useState();
+export default class Aluno extends Component {
+    state = {
+        series: [],
+        page: 1,
+        name: '',
+        marked: '',
+        responsavel: '',
+        alunos: [],
+        serie_id: '',
+        tabela: ''
+    };
     
-    useEffect(() => {
+    componentWillMount(){
         api.get('/serie').then(response => {
-            setSeries(response.data);
-        })
-    },[]);
+            this.setState({series: response.data});
+        });
+    }
 
-    async function handleSubmit(){
-        api.get(`/series?serie_id=${serie_id}&responsavel=${responsavel}&name=${name}&page=1`).then(response => {
-            setAlunos(response.data);
+    handleSubmit = async(e) => {
+        e.preventDefault();
+        await api.get('/series', {
+            params: {
+                serie_id: this.state.serie_id,
+                responsavel: this.state.responsavel,
+                name: this.state.name,
+                page: this.state.page
+            }
+        }).then(response => {
+            this.setState({alunos: response.data, tabela: 1});
         });
         
     }
 
-    function handleOnChange(e) {
-        e.target.name = e.target.value;
-        setName(e.target.name);
-    };
-
-    function handleOnChangeResponsavel(e){
-        e.target.name = e.target.value;
-        setResponsavel(e.target.name);
-    }
-
-    function handleSelectSerie(e){
-        setSerieID(e.target.value);
-    }
+    handleOnChange = e => {
+        this.setState({
+          ...this.state,
+          [e.target.name]: e.target.value 
+        });
+      };
     
-    return ( 
-        <div className="home">
-            <div className="container">
-                <header>
-                    <div className="row">
-                        <h2>Seja Bem Vindo, <strong>Diego Paiva</strong></h2>
-                        <img src={AlunoImg} alt="Aluno" />
-                        <div className="icon">
-                            <FiLogOut size={25} style={{margin: "7 auto", display: "block"}} color="#fff"/>
-                        </div>
-                    </div>
-                </header>
-                <section>
-                    <div className="title">Alunos</div>
-                    <form onSubmit={handleSubmit}>
+    verificaTable = () => {
+        if(this.state.tabela === 1){
+            return <TableAluno {...this.state}/>
+        }
+    }
+
+    render(){
+        return ( 
+            <div className="home">
+                <div className="container">
+                    <header>
                         <div className="row">
-                            <div className="form-group">
-                                <select onChange={handleSelectSerie} value={serie_id}>
-                                    <option value="0">Selecione uma Série</option>
-                                    {series.map(serie => (
-                                        <option key={serie.id} value={serie.id}>{serie.serie}</option>
-                                    ))}
-                                </select>
-                                <input type="text" onChange={handleOnChange} name="name" value={name} className="name" placeholder="Nome do Aluno" />
-                                <input type="text" onChange={handleOnChangeResponsavel} name="responsavel" value={responsavel} placeholder="Nome do Responsável" />
-                            </div>
-                            <div className="adicionais">
-                                <button><FiPlus size={35} color="#4CB0E3" title="Cadastrar Aluno" /></button>
-                                <button type="submit"><FiSearch size={30} color="#4CB0E3" title="Pesquisar Aluno" /></button>
+                            <h2>Seja Bem Vindo, <strong>Diego Paiva</strong></h2>
+                            <img src={AlunoImg} alt="Aluno" />
+                            <div className="icon">
+                                <FiLogOut size={25} style={{margin: "7 auto", display: "block"}} color="#fff"/>
                             </div>
                         </div>
-                    </form>
-                    <div className="container-table">
+                    </header>
+                    <section>
+                        <div className="title">Alunos</div>
+                        <form>
+                            <div className="row">
+                                <div className="form-group">
+                                    <select onChange={this.handleOnChange} name="serie_id" value={this.serie_id}>
+                                        <option value="0">Selecione uma Série</option>
+                                        {this.state.series.map(serie => (
+                                            <option key={serie.id} value={serie.id}>{serie.serie}</option>
+                                        ))}
+                                    </select>
+                                    <input type="text" onChange={this.handleOnChange} name="name" value={this.name} className="name" placeholder="Nome do Aluno" />
+                                    <input type="text" onChange={this.handleOnChange} name="responsavel" value={this.responsavel} placeholder="Nome do Responsável" />
+                                </div>
+                                <div className="adicionais">
+                                    <button><FiPlus size={35} color="#4CB0E3" title="Cadastrar Aluno" /></button>
+                                    <button type="submit" onClick={this.handleSubmit}><FiSearch size={30} color="#4CB0E3" title="Pesquisar Aluno" /></button>
+                                </div>
+                            </div>
+                        </form>
                         <Table width="90%" aria-label="sticky table">
-                            <TableHead>
+                            <TableHead style={{display: 'inline-table', width: '100%'}}>
                                 <TableRow>
                                     <TableCell>#</TableCell>
                                     <TableCell>Aluno</TableCell>
                                     <TableCell>Email</TableCell>
                                     <TableCell>Telefone</TableCell>
                                     <TableCell>Responsavel</TableCell>
+                                    <TableCell>Série</TableCell>
                                     <TableCell>Ações</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell><input type="checkbox"/></TableCell>
-                                    <TableCell>José Diego Paiva Menezes</TableCell>
-                                    <TableCell>diiegopaiivam@gmail.com</TableCell>
-                                    <TableCell>(85) 992777480</TableCell>
-                                    <TableCell>Maria Lucineide Batista de Paiva</TableCell>
-                                    <TableCell><FiEdit size={25} color="#4CB0E3" /> &nbsp; <FiTrash size={25} color="#4CB0E3" /></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell><input type="checkbox"/></TableCell>
-                                    <TableCell>José Diego Paiva Menezes</TableCell>
-                                    <TableCell>diiegopaiivam@gmail.com</TableCell>
-                                    <TableCell>(85) 992777480</TableCell>
-                                    <TableCell>Maria Lucineide Batista de Paiva</TableCell>
-                                    <TableCell><FiEdit size={25} color="#4CB0E3" /> &nbsp; <FiTrash size={25} color="#4CB0E3" /></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell><input type="checkbox"/></TableCell>
-                                    <TableCell>José Diego Paiva Menezes</TableCell>
-                                    <TableCell>diiegopaiivam@gmail.com</TableCell>
-                                    <TableCell>(85) 992777480</TableCell>
-                                    <TableCell>Maria Lucineide Batista de Paiva</TableCell>
-                                    <TableCell><FiEdit size={25} color="#4CB0E3" /> &nbsp; <FiTrash size={25} color="#4CB0E3" /></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell><input type="checkbox"/></TableCell>
-                                    <TableCell>José Diego Paiva Menezes</TableCell>
-                                    <TableCell>diiegopaiivam@gmail.com</TableCell>
-                                    <TableCell>(85) 992777480</TableCell>
-                                    <TableCell>Maria Lucineide Batista de Paiva</TableCell>
-                                    <TableCell><FiEdit size={25} color="#4CB0E3" /> &nbsp; <FiTrash size={25} color="#4CB0E3" /></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell><input type="checkbox"/></TableCell>
-                                    <TableCell>José Diego Paiva Menezes</TableCell>
-                                    <TableCell>diiegopaiivam@gmail.com</TableCell>
-                                    <TableCell>(85) 992777480</TableCell>
-                                    <TableCell>Maria Lucineide Batista de Paiva</TableCell>
-                                    <TableCell><FiEdit size={25} color="#4CB0E3" /> &nbsp; <FiTrash size={25} color="#4CB0E3" /></TableCell>
-                                </TableRow>
-                            </TableBody>
+                            {this.verificaTable()}
                         </Table>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
-export default Aluno;
+    

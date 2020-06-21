@@ -33,7 +33,7 @@ class Serie {
             .limit(5)
             .offset((page - 1)*5)
             .distinct()
-            .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
+            .select('alunos.id','alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
     
             return alunos;
         } 
@@ -45,7 +45,7 @@ class Serie {
             .where('alunos.name', nome)
             .where('serie_id', serie_id)
             .distinct()
-            .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
+            .select('alunos.id','alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
 
             return alunos;
         }
@@ -57,7 +57,7 @@ class Serie {
         .where('alunos.name', nome)
         .where('serie_id', serie_id)
         .distinct()
-        .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
+        .select('alunos.id', 'alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
 
         return alunos;
     }
