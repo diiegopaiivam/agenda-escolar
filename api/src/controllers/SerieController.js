@@ -30,13 +30,15 @@ module.exports = {
     },
 
     async show(request, response){
-        const { serie_id, responsavel, name } = request.query;
+        const { serie_id, responsavel, name, page = 1 } = request.query;
         
         //Se vier apenas a série da requisição, exibirá todos os alunos na mesma série
         if(responsavel.length == [] && name.length == []){
             var responsable = 0;
             var nome = 1;
-            const aluno = await Serie.show(serie_id, responsable , nome);
+
+            const aluno = await Serie.show(serie_id, responsable , nome, page);
+            
 
             return response.status(200).json(aluno);
         }
@@ -44,7 +46,7 @@ module.exports = {
         //Se vier serie_id e nome do aluno 
         if(responsavel.length == []){
             var responsable = 0;
-            const aluno = await Serie.show(serie_id, responsable , name);
+            const aluno = await Serie.show(serie_id, responsable , name, page);
 
             return response.status(200).json(aluno);
         }
@@ -57,7 +59,7 @@ module.exports = {
         /**
          * método que pega o aluno passando como parâmetros o id da série, o id do responsável e o nome do aluno
          */
-        const aluno = await Serie.show(serie_id, resp[0].id, name); 
+        const aluno = await Serie.show(serie_id, resp[0].id, name, page); 
 
         return response.status(200).json(aluno);
     }
