@@ -33,9 +33,9 @@ module.exports = {
         const { serie_id, responsavel, name } = request.query;
         
         //Se vier apenas a série da requisição, exibirá todos os alunos na mesma série
-        if(responsavel.length == [] && name.length == [] ){
+        if(responsavel.length == [] && name.length == []){
             var responsable = 0;
-            var nome = "";
+            var nome = 1;
             const aluno = await Serie.show(serie_id, responsable , nome);
 
             return response.status(200).json(aluno);

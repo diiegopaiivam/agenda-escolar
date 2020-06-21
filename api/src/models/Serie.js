@@ -22,14 +22,15 @@ class Serie {
 
     //método que busca um ou vários alunos de uma série espécifica passando serie, responsável e nome
     //O responsável id já vem de um tratamento do controller
-    async show(serie_id, responsavel_id, name){
+    async show(serie_id, responsavel_id, nome){
         
-        if(responsavel_id == 0 && name.lenght == ""){
+        if(responsavel_id == 0 && nome == 1){
             const alunos = await connection('alunos')
             .join('series', 'alunos.serie_id', '=', 'series.id')
+            .join('responsaveis', 'alunos.responsavel_id', '=', 'responsaveis.id')
             .where('serie_id', serie_id)
             .distinct()
-            .select('alunos.*');
+            .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
     
             return alunos;
         } 
@@ -37,21 +38,23 @@ class Serie {
         if(responsavel_id == 0){
             const alunos = await connection('alunos')
             .join('series', 'alunos.serie_id', '=', 'series.id')
-            .where('name', name)
+            .join('responsaveis', 'alunos.responsavel_id', '=', 'responsaveis.id')
+            .where('alunos.name', nome)
             .where('serie_id', serie_id)
             .distinct()
-            .select('alunos.*');
+            .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
 
             return alunos;
         }
 
         const alunos = await connection('alunos')
         .join('series', 'alunos.serie_id', '=', 'series.id')
+        .join('responsaveis', 'alunos.responsavel_id', '=', 'responsaveis.id')
         .where('responsavel_id', responsavel_id )
-        .where('name', name)
+        .where('alunos.name', nome)
         .where('serie_id', serie_id)
         .distinct()
-        .select('alunos.*');
+        .select('alunos.name as nome', 'alunos.email', 'alunos.phone', 'responsaveis.name as responsavel','series.serie');
 
         return alunos;
     }
