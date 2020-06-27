@@ -1,18 +1,30 @@
 import React from 'react';
-import { TableRow, TableBody, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableRow, TableBody, TableCell } from '@material-ui/core';
 import { FiTrash, FiEdit } from 'react-icons/fi';
 
 import './style.css';
 
 
 const TableAluno = (props) => {
-    if(props.tabela === 1){
-        return (
-            <div className="container-table">
-                <TableBody style={{display: 'inline-table', width: '100%'}}>
+    return (
+        <div className="container-table">
+            <p>Selecione os Alunos que deseja enviar os comunicados.</p>
+            <Table width="90%" aria-label="sticky table">
+                <TableHead align="center">
+                    <TableRow>
+                        <TableCell>#</TableCell>
+                        <TableCell>Aluno</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell>Telefone</TableCell>
+                        <TableCell>Responsavel</TableCell>
+                        <TableCell>Série</TableCell>
+                        <TableCell>Ações</TableCell>
+                    </TableRow>
+                </TableHead>      
+                <TableBody align="center">
                     {props.alunos.map(aluno => (
                         <TableRow key={aluno.id}>
-                            <TableCell><input type="checkbox"/></TableCell>
+                            <TableCell><input type="checkbox" value={props.marked} onChange={props.handleCheckbox} name={aluno.nome}/></TableCell>
                             <TableCell>{aluno.nome}</TableCell>
                             <TableCell>{aluno.email}</TableCell>
                             <TableCell>{aluno.phone}</TableCell>
@@ -22,9 +34,9 @@ const TableAluno = (props) => {
                         </TableRow>
                     ))}
                 </TableBody>
-            </div> 
-        );
-    }
+            </Table>
+        </div> 
+    );
 }
 
 

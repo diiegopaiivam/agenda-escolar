@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FiLogOut, FiPlus, FiSearch } from 'react-icons/fi';
-import { Table, TableHead, TableRow, TableCell } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import TableAluno from './table';
 import AlunoImg from './../../assets/aluno.svg';
@@ -18,7 +18,7 @@ export default class Aluno extends Component {
         responsavel: '',
         alunos: [],
         serie_id: '',
-        tabela: ''
+        selecao_alunos: []
     };
     
     componentWillMount(){
@@ -47,14 +47,14 @@ export default class Aluno extends Component {
           ...this.state,
           [e.target.name]: e.target.value 
         });
-      };
+    };
     
-    verificaTable = () => {
-        if(this.state.tabela === 1){
-            return <TableAluno {...this.state}/>
-        }
-    }
 
+    handleCheckbox = (e) => {
+        const selecao_alunos = { ...this.state.selecao_alunos, [e.target.name]: (e.target.checked === true ? 1 : 0) };
+        this.setState({ selecao_alunos });
+    };
+    
     render(){
         return ( 
             <div className="home">
@@ -83,25 +83,16 @@ export default class Aluno extends Component {
                                     <input type="text" onChange={this.handleOnChange} name="responsavel" value={this.responsavel} placeholder="Nome do Responsável" />
                                 </div>
                                 <div className="adicionais">
-                                    <button><FiPlus size={35} color="#4CB0E3" title="Cadastrar Aluno" /></button>
+                                    <button><Link to="/new"><FiPlus size={35} color="#4CB0E3" title="Cadastrar Aluno" /></Link></button>
                                     <button type="submit" onClick={this.handleSubmit}><FiSearch size={30} color="#4CB0E3" title="Pesquisar Aluno" /></button>
                                 </div>
                             </div>
                         </form>
-                        <Table width="90%" aria-label="sticky table">
-                            <TableHead style={{display: 'inline-table', width: '100%'}}>
-                                <TableRow>
-                                    <TableCell>#</TableCell>
-                                    <TableCell>Aluno</TableCell>
-                                    <TableCell>Email</TableCell>
-                                    <TableCell>Telefone</TableCell>
-                                    <TableCell>Responsavel</TableCell>
-                                    <TableCell>Série</TableCell>
-                                    <TableCell>Ações</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            {this.verificaTable()}
-                        </Table>
+                        <TableAluno
+                        {...this.state}
+                        handleOnChange={this.handleOnChange}
+                        handleCheckbox={this.handleCheckbox}
+                        />
                     </section>
                 </div>
             </div>
