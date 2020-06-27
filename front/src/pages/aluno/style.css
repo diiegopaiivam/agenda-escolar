@@ -119,3 +119,51 @@
     background-color: #fff;
     padding: 10px;
 }
+
+.section-new {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.section-new img {
+    margin-left: 40px;
+    width: 100%;
+    max-width: 650px;  
+}
+
+.section-new .form-card {
+    margin-right: 40px;
+    height: 60vh;
+    width: 70vh;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.23);
+}
+
+.section-new .form-card h1 {
+    color: #4CB0E3;
+    text-align: center;
+}
+
+.section-new .form-card form input{
+    margin: 5px;
+    border: none;
+    background-color: #F6F6F6;
+    box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.23);
+}
+
+.section-new .form-card form button {
+    background-color:  #4CB0E3; 
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    margin: 5px;
+    transition: filter 0.2s;
+}
+
+.section-new .form-card form button:hover {
+    filter: brightness(90%);
+}
