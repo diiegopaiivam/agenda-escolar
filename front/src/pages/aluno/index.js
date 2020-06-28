@@ -18,7 +18,8 @@ export default class Aluno extends Component {
         responsavel: '',
         alunos: [],
         serie_id: '',
-        selecao_alunos: []
+        selecao_alunos: [],
+        error: ''
     };
     
     componentWillMount(){
@@ -37,7 +38,7 @@ export default class Aluno extends Component {
                 page: this.state.page
             }
         }).then(response => {
-            this.setState({alunos: response.data, tabela: 1});
+            this.setState({alunos: response.data, tabela: 1}); 
         });
         
     }
@@ -54,6 +55,8 @@ export default class Aluno extends Component {
         const selecao_alunos = { ...this.state.selecao_alunos, [e.target.name]: (e.target.checked === true ? 1 : 0) };
         this.setState({ selecao_alunos });
     };
+
+    
     
     render(){
         return ( 
@@ -64,7 +67,7 @@ export default class Aluno extends Component {
                             <h2>Seja Bem Vindo, <strong>Diego Paiva</strong></h2>
                             <img src={AlunoImg} alt="Aluno" />
                             <div className="icon">
-                                <FiLogOut size={25} style={{margin: "7 auto", display: "block"}} color="#fff"/>
+                                <Link to="/"><FiLogOut size={25} style={{margin: "7 auto", display: "block"}} color="#fff"/></Link>
                             </div>
                         </div>
                     </header>

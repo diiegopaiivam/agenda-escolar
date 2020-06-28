@@ -6,6 +6,7 @@ import Aluno from './pages/aluno/index';
 import Responsavel from './pages/responsavel/index';
 import Comunicado from './pages/comunicado/index';
 import New from './pages/aluno/new';
+import NewResp from './pages/responsavel/newResp';
 
 
 export default function Routes(){
@@ -17,6 +18,7 @@ export default function Routes(){
                 <Route path="/responsavel" component={Responsavel} />
                 <Route path="/comunicado" component={Comunicado} />
                 <Route path='/new' component={New} />
+                <Route path="/respnew" component={NewResp} />
             </Switch>
         </BrowserRouter>
     );
