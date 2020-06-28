@@ -94,6 +94,20 @@
     box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.23);
 }
 
+.row .adicionais .enviar {
+    width: 70px;
+    background-color: #4CB0E3;
+    border-radius: 5px;
+    margin: 3px;
+    border: none;
+    box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.23);
+    transition: filter 0.2s;
+}
+
+.row .adicionais .enviar:hover {
+    filter: brightness(85%);
+}
+
 .row .form-group input {
     margin: 5px;
     width: 570px;

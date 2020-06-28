@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FiLogOut, FiPlus, FiSearch } from 'react-icons/fi';
+import { FiLogOut, FiPlus, FiSearch, FiSend } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import TableAluno from './table';
@@ -88,6 +88,7 @@ export default class Aluno extends Component {
                                 <div className="adicionais">
                                     <button><Link to="/new"><FiPlus size={35} color="#4CB0E3" title="Cadastrar Aluno" /></Link></button>
                                     <button type="submit" onClick={this.handleSubmit}><FiSearch size={30} color="#4CB0E3" title="Pesquisar Aluno" /></button>
+                                    <button className="enviar"><Link to="/comunicado"><FiSend style={{marginTop: '5px', marginRight: '5px'}} size={30} color="#fff" title="Enviar Comunicado" /></Link></button>
                                 </div>
                             </div>
                         </form>
